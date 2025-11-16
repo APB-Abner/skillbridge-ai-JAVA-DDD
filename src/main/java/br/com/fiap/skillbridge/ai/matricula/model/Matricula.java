@@ -5,6 +5,7 @@ import br.com.fiap.skillbridge.ai.user.model.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.PastOrPresent;
 import lombok.*;
+
 import java.time.LocalDateTime;
 
 @Entity @Table(name="matriculas", uniqueConstraints=@UniqueConstraint(columnNames={"user_id","trilha_id"}))

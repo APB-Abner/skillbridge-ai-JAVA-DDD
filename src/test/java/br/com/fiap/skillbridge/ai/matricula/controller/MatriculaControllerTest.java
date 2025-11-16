@@ -4,8 +4,8 @@ import br.com.fiap.skillbridge.ai.matricula.dto.MatriculaRequest;
 import br.com.fiap.skillbridge.ai.matricula.dto.MatriculaResponse;
 import br.com.fiap.skillbridge.ai.matricula.dto.MatriculaUpdateRequest;
 import br.com.fiap.skillbridge.ai.matricula.service.MatriculaService;
-import br.com.fiap.skillbridge.ai.shared.exception.NotFoundException;
 import br.com.fiap.skillbridge.ai.shared.exception.GlobalExceptionHandler;
+import br.com.fiap.skillbridge.ai.shared.exception.NotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -25,7 +25,8 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(MatriculaController.class)
 @AutoConfigureMockMvc(addFilters = false) // ignora filtros do Spring Security
@@ -192,4 +193,5 @@ class MatriculaControllerTest {
                         .content("{}"))
                 .andExpect(status().isBadRequest());
     }
+
 }

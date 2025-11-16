@@ -1,4 +1,4 @@
-package br.com.fiap.skillbridge.ai.exception;
+package br.com.fiap.skillbridge.ai.shared.exception;
 
 import java.time.Instant;
 import java.util.List;

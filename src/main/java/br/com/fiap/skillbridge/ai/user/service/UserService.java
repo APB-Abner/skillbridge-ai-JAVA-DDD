@@ -1,12 +1,14 @@
 package br.com.fiap.skillbridge.ai.user.service;
 
-import br.com.fiap.skillbridge.ai.user.dto.*;
+import br.com.fiap.skillbridge.ai.shared.exception.NotFoundException;
+import br.com.fiap.skillbridge.ai.user.dto.UserRequest;
+import br.com.fiap.skillbridge.ai.user.dto.UserResponse;
+import br.com.fiap.skillbridge.ai.user.dto.UserUpdateRequest;
 import br.com.fiap.skillbridge.ai.user.model.User;
 import br.com.fiap.skillbridge.ai.user.repository.UserRepository;
-import br.com.fiap.skillbridge.ai.shared.exception.NotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;

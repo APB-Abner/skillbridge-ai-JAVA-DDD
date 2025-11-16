@@ -1,7 +1,9 @@
 package br.com.fiap.skillbridge.ai.trilha.dto;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TrilhaDtosTest {
     @Test void request_getters(){

@@ -1,0 +1,155 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MatriculaController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">br.com.fiap.skillbridge.ai.matricula.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: MatriculaController (br.com.fiap.skillbridge.ai.matricula.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MatriculaController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package br.com.fiap.skillbridge.ai.matricula.controller;
+&nbsp;
+&nbsp;import br.com.fiap.skillbridge.ai.matricula.dto.MatriculaRequest;
+&nbsp;import br.com.fiap.skillbridge.ai.matricula.dto.MatriculaResponse;
+&nbsp;import br.com.fiap.skillbridge.ai.matricula.dto.MatriculaUpdateRequest;
+&nbsp;import br.com.fiap.skillbridge.ai.matricula.service.MatriculaService;
+&nbsp;import io.swagger.v3.oas.annotations.Operation;
+&nbsp;import io.swagger.v3.oas.annotations.tags.Tag;
+&nbsp;import jakarta.validation.Valid;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Tag(name = &quot;Matrículas&quot;)
+&nbsp;@RestController
+&nbsp;@RequestMapping(&quot;/api/v1/matriculas&quot;)
+&nbsp;public class MatriculaController {
+&nbsp;    private final MatriculaService service;
+&nbsp;
+<b class="fc">&nbsp;    public MatriculaController(MatriculaService service) {</b>
+<b class="fc">&nbsp;        this.service = service;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Operation(summary = &quot;Matricula usuário em trilha&quot;)
+&nbsp;    @PostMapping
+&nbsp;    @ResponseStatus(HttpStatus.CREATED)
+&nbsp;    public MatriculaResponse create(@RequestBody @Valid MatriculaRequest r) {
+<b class="fc">&nbsp;        return service.create(r);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Operation(summary = &quot;Lista matrículas (filtros opcionais)&quot;)
+&nbsp;    @GetMapping
+&nbsp;    public List&lt;MatriculaResponse&gt; list(@RequestParam(required = false) Long userId,
+&nbsp;                                        @RequestParam(required = false) Long trilhaId) {
+<b class="fc">&nbsp;        return service.list(userId, trilhaId);</b>
+&nbsp;    }
+&nbsp;@Operation(summary = &quot;Atualiza matrícula&quot;)
+&nbsp;    @PutMapping(&quot;/{id}&quot;)
+&nbsp;    public MatriculaResponse update(@PathVariable Long id,
+&nbsp;                                    @RequestBody @Valid MatriculaUpdateRequest r) {
+<b class="fc">&nbsp;        return service.update(id, r);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Operation(summary = &quot;Cancela matrícula&quot;)
+&nbsp;    @DeleteMapping(&quot;/{id}&quot;)
+&nbsp;    @ResponseStatus(HttpStatus.NO_CONTENT)
+&nbsp;    public void delete(@PathVariable Long id) {
+<b class="fc">&nbsp;        service.delete(id);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-11-16 13:11</div>
+</div>
+</body>
+</html>

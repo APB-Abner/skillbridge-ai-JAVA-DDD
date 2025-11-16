@@ -12,13 +12,15 @@ import br.com.fiap.skillbridge.ai.user.model.User;
 import br.com.fiap.skillbridge.ai.user.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -321,10 +323,10 @@ class MatriculaServiceTest {
 
         var m = new Matricula();
         m.setId(100L); m.setUser(user); m.setTrilha(trilha1);
-        m.setCriadaEm(java.time.LocalDateTime.now());
+        m.setCriadaEm(LocalDateTime.now());
 
-        when(repo.findById(100L)).thenReturn(java.util.Optional.of(m));
-        when(trilhaRepo.findById(20L)).thenReturn(java.util.Optional.of(trilha2));
+        when(repo.findById(100L)).thenReturn(Optional.of(m));
+        when(trilhaRepo.findById(20L)).thenReturn(Optional.of(trilha2));
         when(repo.existsByUser_IdAndTrilha_Id(1L, 20L)).thenReturn(false);
         // devolve o próprio objeto salvo, já mutado pelo service
         when(repo.save(any(Matricula.class))).thenAnswer((Answer<Matricula>) inv -> inv.getArgument(0));
@@ -343,9 +345,9 @@ class MatriculaServiceTest {
 
         var m = new Matricula();
         m.setId(100L); m.setUser(user); m.setTrilha(trilha);
-        m.setCriadaEm(java.time.LocalDateTime.now());
+        m.setCriadaEm(LocalDateTime.now());
 
-        when(repo.findById(100L)).thenReturn(java.util.Optional.of(m));
+        when(repo.findById(100L)).thenReturn(Optional.of(m));
         when(repo.save(any(Matricula.class))).thenAnswer(inv -> inv.getArgument(0));
 
         var resp = service.update(100L, new MatriculaUpdateRequest(null, null));
@@ -364,15 +366,28 @@ class MatriculaServiceTest {
 
         var m = new Matricula();
         m.setId(100L); m.setUser(user); m.setTrilha(trilha1);
-        m.setCriadaEm(java.time.LocalDateTime.now());
+        m.setCriadaEm(LocalDateTime.now());
 
-        when(repo.findById(100L)).thenReturn(java.util.Optional.of(m));
-        when(trilhaRepo.findById(20L)).thenReturn(java.util.Optional.of(trilha2));
+        when(repo.findById(100L)).thenReturn(Optional.of(m));
+        when(trilhaRepo.findById(20L)).thenReturn(Optional.of(trilha2));
         when(repo.existsByUser_IdAndTrilha_Id(1L, 20L)).thenReturn(true);
 
         assertThrows(IllegalArgumentException.class,
                 () -> service.update(100L, new MatriculaUpdateRequest(null, 20L)));
 
+        verify(repo, never()).save(any(Matricula.class));
+    }
+
+    @Test
+    void update_quandoMatriculaNaoExiste_lancaNotFound() {
+        when(repo.findById(999L)).thenReturn(Optional.empty());
+
+        assertThrows(NotFoundException.class,
+                () -> service.update(999L, new MatriculaUpdateRequest(1L, 2L)));
+
+        // ninguém mais deve ser chamado
+        verify(userRepo, never()).findById(anyLong());
+        verify(trilhaRepo, never()).findById(anyLong());
         verify(repo, never()).save(any(Matricula.class));
     }
 

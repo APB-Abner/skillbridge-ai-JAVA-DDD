@@ -1,11 +1,14 @@
 package br.com.fiap.skillbridge.ai.trilha.service;
 
 import br.com.fiap.skillbridge.ai.shared.exception.NotFoundException;
-import br.com.fiap.skillbridge.ai.trilha.dto.*;
+import br.com.fiap.skillbridge.ai.trilha.dto.TrilhaRequest;
+import br.com.fiap.skillbridge.ai.trilha.dto.TrilhaResponse;
+import br.com.fiap.skillbridge.ai.trilha.dto.TrilhaUpdateRequest;
 import br.com.fiap.skillbridge.ai.trilha.model.Trilha;
 import br.com.fiap.skillbridge.ai.trilha.repository.TrilhaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service

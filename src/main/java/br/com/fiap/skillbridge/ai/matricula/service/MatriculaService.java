@@ -1,6 +1,8 @@
 package br.com.fiap.skillbridge.ai.matricula.service;
 
-import br.com.fiap.skillbridge.ai.matricula.dto.*;
+import br.com.fiap.skillbridge.ai.matricula.dto.MatriculaRequest;
+import br.com.fiap.skillbridge.ai.matricula.dto.MatriculaResponse;
+import br.com.fiap.skillbridge.ai.matricula.dto.MatriculaUpdateRequest;
 import br.com.fiap.skillbridge.ai.matricula.model.Matricula;
 import br.com.fiap.skillbridge.ai.matricula.repository.MatriculaRepository;
 import br.com.fiap.skillbridge.ai.shared.exception.NotFoundException;
@@ -8,6 +10,7 @@ import br.com.fiap.skillbridge.ai.trilha.repository.TrilhaRepository;
 import br.com.fiap.skillbridge.ai.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.time.LocalDateTime;
 import java.util.List;
 

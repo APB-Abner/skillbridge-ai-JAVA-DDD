@@ -1,6 +1,8 @@
 package br.com.fiap.skillbridge.ai.user.controller;
 
-import br.com.fiap.skillbridge.ai.user.dto.*;
+import br.com.fiap.skillbridge.ai.user.dto.UserRequest;
+import br.com.fiap.skillbridge.ai.user.dto.UserResponse;
+import br.com.fiap.skillbridge.ai.user.dto.UserUpdateRequest;
 import br.com.fiap.skillbridge.ai.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,4 +1,4 @@
-package br.com.fiap.skillbridge.ai.exception;
+package br.com.fiap.skillbridge.ai.shared.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataIntegrityViolationException;

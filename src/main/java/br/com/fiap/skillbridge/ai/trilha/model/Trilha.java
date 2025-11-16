@@ -1,7 +1,8 @@
 package br.com.fiap.skillbridge.ai.trilha.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Entity @Table(name="trilhas")

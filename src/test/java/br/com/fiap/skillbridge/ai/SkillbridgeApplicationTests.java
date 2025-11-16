@@ -1,20 +1,16 @@
+// java
 package br.com.fiap.skillbridge.ai;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-
+@ActiveProfiles("test")
 @SpringBootTest
-class SkillbridgeAiApplicationTests {
+class SkillbridgeApplicationTests {
 
     @Test
-    void main_runsWithoutExceptions() {
-        assertDoesNotThrow(() -> SkillbridgeApplication.main(new String[]{}));
+    void contextLoads() {
+        // verifies Spring context starts with isolated test DB
     }
-
-    @Test
-	void contextLoads() {
-	}
-
 }

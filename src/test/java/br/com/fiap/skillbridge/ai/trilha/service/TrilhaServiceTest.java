@@ -7,10 +7,12 @@ import br.com.fiap.skillbridge.ai.trilha.model.Trilha;
 import br.com.fiap.skillbridge.ai.trilha.repository.TrilhaRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -109,4 +111,33 @@ class TrilhaServiceTest {
         assertEquals("DevOps", res.titulo());
         assertEquals("Pipelines", res.descricao());
     }
+    @Test
+    void create_quandoAtivaFalseSalvaFalse() {
+        when(repo.save(any())).thenAnswer(a -> {
+            Trilha salvo = a.getArgument(0);
+            salvo.setId(100L);
+            return salvo;
+        });
+
+        var res = service.create(new TrilhaRequest("API REST", "Desc", false));
+
+        assertEquals(100L, res.id());
+        assertFalse(res.ativa());
+    }
+
+    @Test
+    void update_quandoTrilhaNaoExiste_lancaNotFound() {
+        Long idInexistente = 99L;
+
+        when(repo.findById(idInexistente)).thenReturn(Optional.empty());
+
+        var request = new TrilhaUpdateRequest("Novo título", "Nova desc", true);
+
+        assertThrows(NotFoundException.class,
+                () -> service.update(idInexistente, request));
+
+        verify(repo).findById(idInexistente);
+        verify(repo, never()).save(any());
+    }
+
 }

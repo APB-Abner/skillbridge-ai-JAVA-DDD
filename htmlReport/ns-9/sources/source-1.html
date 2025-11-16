@@ -1,0 +1,188 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > TrilhaService</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">br.com.fiap.skillbridge.ai.trilha.service</a>
+</div>
+
+<h1>Coverage Summary for Class: TrilhaService (br.com.fiap.skillbridge.ai.trilha.service)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TrilhaService</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (18/18)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TrilhaService$$SpringCGLIB$$0</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (18/18)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package br.com.fiap.skillbridge.ai.trilha.service;
+&nbsp;
+&nbsp;import br.com.fiap.skillbridge.ai.shared.exception.NotFoundException;
+&nbsp;import br.com.fiap.skillbridge.ai.trilha.dto.TrilhaRequest;
+&nbsp;import br.com.fiap.skillbridge.ai.trilha.dto.TrilhaResponse;
+&nbsp;import br.com.fiap.skillbridge.ai.trilha.dto.TrilhaUpdateRequest;
+&nbsp;import br.com.fiap.skillbridge.ai.trilha.model.Trilha;
+&nbsp;import br.com.fiap.skillbridge.ai.trilha.repository.TrilhaRepository;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;import org.springframework.transaction.annotation.Transactional;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Service
+&nbsp;public class TrilhaService {
+&nbsp;    private final TrilhaRepository repo;
+<b class="fc">&nbsp;    public TrilhaService(TrilhaRepository repo){ this.repo = repo; }</b>
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public TrilhaResponse create(TrilhaRequest r){
+<b class="fc">&nbsp;        var t = Trilha.builder()</b>
+<b class="fc">&nbsp;                .titulo(r.titulo())</b>
+<b class="fc">&nbsp;                .descricao(r.descricao())</b>
+<b class="fc">&nbsp;                .ativa(r.ativa() == null || r.ativa())</b>
+<b class="fc">&nbsp;                .build();</b>
+<b class="fc">&nbsp;        return map(repo.save(t));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional(readOnly = true)
+<b class="fc">&nbsp;    public List&lt;TrilhaResponse&gt; list(){ return repo.findAll().stream().map(this::map).toList(); }</b>
+&nbsp;
+&nbsp;    @Transactional(readOnly = true)
+&nbsp;    public TrilhaResponse get(Long id){
+<b class="fc">&nbsp;        var t = repo.findById(id).orElseThrow(() -&gt; new NotFoundException(&quot;Trilha não encontrada.&quot;));</b>
+<b class="fc">&nbsp;        return map(t);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public TrilhaResponse update(Long id, TrilhaUpdateRequest r){
+<b class="fc">&nbsp;        var t = repo.findById(id).orElseThrow(() -&gt; new NotFoundException(&quot;Trilha não encontrada.&quot;));</b>
+<b class="fc">&nbsp;        t.setTitulo(r.titulo());</b>
+<b class="fc">&nbsp;        t.setDescricao(r.descricao());</b>
+<b class="fc">&nbsp;        if (r.ativa()!=null) t.setAtiva(r.ativa());</b>
+<b class="fc">&nbsp;        return map(repo.save(t));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Transactional
+&nbsp;    public void delete(Long id){
+<b class="fc">&nbsp;        if (!repo.existsById(id)) throw new NotFoundException(&quot;Trilha não encontrada.&quot;);</b>
+<b class="fc">&nbsp;        repo.deleteById(id);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private TrilhaResponse map(Trilha t){ return new TrilhaResponse(t.getId(), t.getTitulo(), t.getDescricao(), t.isAtiva()); }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-11-16 13:11</div>
+</div>
+</body>
+</html>
